@@ -3,13 +3,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { User } = require('./models/user');
-
+const config = require('./config/key');
 //connecting to database
 mongoose
-	.connect(
-		'mongodb+srv://klaun:7408449da7@cluster.g6zcw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-		{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-	)
+	.connect(config.mongoURI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+	})
 	.then(() => {
 		console.log('MongoDB connected');
 	})
