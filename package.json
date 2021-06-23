@@ -8,7 +8,7 @@
 		"npm": "6.14.11"
 	},
 	"scripts": {
-		"start": "node /server/index",
+		"start": "node server/index",
 		"backend": "nodemon server/index"
 	},
 	"author": "BekhaIrga",
