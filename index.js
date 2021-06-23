@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { User } = require('./models/user');
 const config = require('./config/key');
+const { auth } = require('./middlewares/auth');
 //connecting to database
 mongoose
 	.connect(config.mongoURI, {
@@ -69,7 +70,16 @@ app.post('/api/users/login', (req, res) => {
 	});
 });
 
-app.get('/api/users/auth');
+app.get('/api/users/auth', auth, (req, res) => {
+	res.status(200).json({
+		id: req.user._id,
+		isAuth: true,
+		email: req.user.email,
+		name: req.user.email,
+		lastName: req.user.lastName,
+		role: req.user.role,
+	});
+});
 
 app.listen('5000', () => {
 	console.log('works');
