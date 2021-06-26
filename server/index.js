@@ -15,7 +15,9 @@ mongoose
 	.then(() => {
 		console.log('MongoDB connected');
 	})
-	.catch((err) => err);
+	.catch((err) => {
+		console.log('Not working', err);
+	});
 
 //using all middlewares
 const app = express();
@@ -44,13 +46,11 @@ app.post('/api/users/login', (req, res) => {
 			return status(400).json({ error: err });
 		}
 		if (!user) {
-			console.log('login');
 			return res.json({
 				loginSuccess: false,
 				message: 'Auth failed, email not found',
 			});
 		}
-
 		user.comparePassword(req.body.password, (err, isMatch) => {
 			if (!isMatch) {
 				return res.json({
